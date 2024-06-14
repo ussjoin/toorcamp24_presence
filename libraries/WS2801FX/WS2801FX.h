@@ -1,3 +1,9 @@
+/* 2024
+Edited by github.com/ussjoin to add the ability to "notch out" individual
+LEDs on a string.
+License remains the same.
+*/
+
 /*
   WS2801FX.h - Library for WS2812 LED effects.
 
@@ -286,6 +292,12 @@ class WS2801FX : public Adafruit_WS2801 {
       increaseBrightness(uint8_t s),
       decreaseBrightness(uint8_t s),
       trigger(void);
+      
+    void
+      turn_off_pixel(uint8_t s),
+      turn_on_pixel(uint8_t s),
+      turn_on_all_pixels(void);
+        
 
     // wrappers that needed to be introduced for switching to WS2801 library
     void
@@ -399,6 +411,7 @@ class WS2801FX : public Adafruit_WS2801 {
 
     mode_ptr
       _mode[MODE_COUNT];
+    
 };
 
 #endif

@@ -1,3 +1,9 @@
+/* 2024
+Edited by github.com/ussjoin to add the ability to "notch out" individual
+LEDs on a string.
+License remains the same.
+*/
+
 /*
   WS2801FX.cpp - Library for WS2801 LED effects.
 
@@ -57,6 +63,8 @@
 #include "WS2801FX.h"
 
 #define CALL_MODE(n) (this->*_mode[n])();
+
+static uint8_t blocked_array [] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 
 void WS2801FX::init() {
   Adafruit_WS2801::begin();
@@ -1267,14 +1275,32 @@ void WS2801FX::setPixelColor(uint16_t n, uint32_t c) {
 }
 
 void WS2801FX::setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
-  r = (pgm_read_byte(&gamma8[r]) * _brightness) >> 8;
-  g = (pgm_read_byte(&gamma8[g]) * _brightness) >> 8;
-  b = (pgm_read_byte(&gamma8[b]) * _brightness) >> 8;
+  // BFO
+  r = (pgm_read_byte(&gamma8[r]) * _brightness * blocked_array[n]) >> 8;
+  g = (pgm_read_byte(&gamma8[g]) * _brightness * blocked_array[n]) >> 8;
+  b = (pgm_read_byte(&gamma8[b]) * _brightness * blocked_array[n]) >> 8;
+  
   if (_order == WS2801_RBG) {
     Adafruit_WS2801::setPixelColor(n, r, b, g);
   } else if (_order == WS2801_GBR) {
     Adafruit_WS2801::setPixelColor(n, g, b, r);
   } else {
     Adafruit_WS2801::setPixelColor(n, r, g, b);
+  }
+}
+
+///BFO
+void WS2801FX::turn_off_pixel(uint8_t s) {
+  blocked_array[s] = 0;
+}
+
+void WS2801FX::turn_on_pixel(uint8_t s) {
+  blocked_array[s] = 1;
+}
+
+void WS2801FX::turn_on_all_pixels() {
+  for (uint8_t i = 0; i < 20; i++)
+  {
+    blocked_array[i] = 1;
   }
 }
