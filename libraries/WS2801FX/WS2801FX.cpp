@@ -386,8 +386,7 @@ void WS2801FX::mode_breath(void) {
   for(uint16_t i=0; i < _led_count; i++) {
     WS2801FX::setPixelColor(i, _color);           // set all LEDs to selected color
   }
-  int b = map(breath_brightness, 0, 255, 0, _brightness);  // keep brightness below brightness set by user
-  WS2801FX::setBrightness(b);                     // set new brightness to leds
+  WS2801FX::setBrightness(breath_brightness);                     // set new brightness to leds
   Adafruit_WS2801::show();
 
   _mode_color = breath_brightness;                         // we use _mode_color to store the brightness
