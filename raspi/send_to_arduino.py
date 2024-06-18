@@ -22,8 +22,9 @@ import re
 frens = re.compile("^NR7WL-[A-Z0-9]{4}$")
 
 # The callback for when the client receives a CONNACK response from the server.
-def on_connect(client, userdata, flags, reason_code, properties):
-    print(f"Connected with result code {reason_code}")
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code "+str(rc))
+
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
     client.subscribe("narwhalbeacon/#")
@@ -45,7 +46,7 @@ def on_message(client, userdata, msg):
     # Send command to Arduino
 
 
-mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+mqttc = mqtt.Client()
 mqttc.on_connect = on_connect
 mqttc.on_message = on_message
 
