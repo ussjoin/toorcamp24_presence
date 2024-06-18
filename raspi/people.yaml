@@ -1,73 +1,73 @@
 users:
-  - andrew:
+  - name: andrew
     beacon: NR7WL-MEME
     color: 651FFF
     number: 1
-  - leslie:
+  - name: leslie
     beacon: NR7WL-BAKE
     color: FF8A65
     number: 2
-  - grant:
+  - name: grant
     beacon: NR7WL-WOOD
     color: ffffff
     number: 3
-  - caroline:
+  - name: caroline
     beacon: NR7WL-ORLY
     color: ffffff
     number: 4
-  - alan:
+  - name: alan
     beacon: NR7WL-FART
     color: ffffff
     number: 5
-  - radia:
+  - name: radia
     beacon: NR7WL-JUMP
     color: ffffff
     number: 6
-  - brendan:
+  - name: brendan
     beacon: NR7WL-EEEP
     color: 18FFFF
     number: 7
-  - lindsey:
+  - name: lindsey
     beacon: NR7WL-NICE
     color: B0FF70
     number: 8
-  - afton:
+  - name: afton
     beacon: NR7WL-LICK
     color: 76FF03
     number: 9
-  - benson:
+  - name: benson
     beacon: NR7WL-OHAI
     color: 1565C0
     number: 10
-  - frankpetrilli:
+  - name: frankpetrilli
     beacon: NR7WL-DOOD
     color: B39DDB
     number: 11
-  - dakota:
+  - name: dakota
     beacon: NR7WL-PARK
     color: 546E7A
     number: 12
-  - matt:
+  - name: matt
     beacon: NR7WL-WHAT
     color: 006064
     number: 13
-  - caleb:
+  - name: caleb
     beacon: NR7WL-HALP
     color: 43A047
     number: 14
-  - sony:
+  - name: sony
     beacon: NR7WL-BIKE
     color: 536DFE
     number: 15
-  - shevek:
+  - name: shevek
     beacon: NR7WL-LITE
     color: 8E24AA
     number: 16
-  - sasha:
+  - name: sasha
     beacon: NR7WL-KNIT
     color: 004D40
     number: 17
-  - maus:
+  - name: maus
     beacon: NR7WL-MAUS
     color: 32174d
     number: 18
