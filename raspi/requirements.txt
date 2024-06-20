@@ -1,3 +1,5 @@
 paho-mqtt
 bleak
 pyyaml
+pyserial
+

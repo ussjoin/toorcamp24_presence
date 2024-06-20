@@ -18,6 +18,7 @@
 import paho.mqtt.client as mqtt
 import yaml
 import re
+import serial
 
 frens = re.compile("^NR7WL-[A-Z0-9]{4}$")
 
@@ -37,13 +38,11 @@ def on_message(client, userdata, msg):
         if identifier in people_lookup:
             person = people_lookup[identifier]
             print(f"Found friend: {person['name']}")
+            ser.write(b"WEL {person['color']}|")
         else:
             print(f"Found someone I don't know: {identifier}")
     else:
         print(f"Got a message incoming I didn't understand: {msg.payload.decode('utf-8')}")
-    
-    # TODO:
-    # Send command to Arduino
 
 
 mqttc = mqtt.Client()
@@ -51,6 +50,14 @@ mqttc.on_connect = on_connect
 mqttc.on_message = on_message
 
 mqttc.connect("localhost", 1883, 60)
+ser = serial.Serial(port='/dev/ttyAMA0',baudrate=9600,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
+
+# if ser.inWaiting():
+#     line=ser.readlines()
+#     print(f">> {line}")
+#
+# ser.write(b"WEL FFFFFF|")
+
 
 people_lookup = {}
 
