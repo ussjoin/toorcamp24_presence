@@ -9,19 +9,19 @@ users:
     number: 2
   - name: grant
     beacon: NR7WL-WOOD
-    color: ffffff
+    color: FFEB3B
     number: 3
   - name: caroline
     beacon: NR7WL-ORLY
-    color: ffffff
+    color: EF5350
     number: 4
   - name: alan
     beacon: NR7WL-FART
-    color: ffffff
+    color: 795548
     number: 5
   - name: radia
     beacon: NR7WL-JUMP
-    color: ffffff
+    color: EC407A
     number: 6
   - name: brendan
     beacon: NR7WL-EEEP
@@ -63,11 +63,19 @@ users:
     beacon: NR7WL-LITE
     color: 8E24AA
     number: 16
-  - name: sasha
-    beacon: NR7WL-KNIT
-    color: 004D40
-    number: 17
   - name: maus
     beacon: NR7WL-MAUS
     color: 32174d
     number: 18
+  - name: whoa
+    beacon: NR7WL-WHOA
+    color: 4DB6AC
+    number: 17
+  - name: whob
+    beacon: NR7WL-WHOB
+    color: 9FA8DA
+    number: 19
+  - name: whoc
+    beacon: NR7WL-WHOC
+    color: DCE775
+    number: 0
