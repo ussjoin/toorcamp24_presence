@@ -1,0 +1,24 @@
+{
+  "name": "WS2801FX",
+  "description": "WS2801 FX Library for Arduino and ESP8266",
+  "keywords": "ws2801, esp8266",
+  "authors": {
+    "name": "Harm Aldick",
+    "url": "https://github.com/r41d/WS2801FX"
+  },
+  "version": "1.0.0",
+  "downloadUrl": "https://github.com/r41d/WS2801FX/archive/master.zip",
+  "frameworks": "arduino",
+  "platforms": "espressif8266",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/r41d/WS2801FX.git"
+  },
+  "dependencies": [
+    {
+      "name": "Adafruit WS2801 Library",
+      "version": "~1.0.0"
+    }
+  ]
+}
+
