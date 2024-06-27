@@ -6,10 +6,10 @@
 #define LED_CLOCK_PIN 3
 #define LENGTH_OF_WELCOME 20000
 
-const byte rxPin = 8; 
-const byte txPin = 9; 
+// const byte rxPin = 8; 
+// const byte txPin = 9; 
  
-SoftwareSerial mySerial (rxPin, txPin); // Begin a software serial on pins D3 and D2 to talk to the Pi
+// SoftwareSerial mySerial (rxPin, txPin); // Begin a software serial on pins D3 and D2 to talk to the Pi
 
 WS2801FX ws2801fx = WS2801FX(LED_COUNT, LED_DATA_PIN, LED_CLOCK_PIN, WS2801_RGB);
 
@@ -21,7 +21,7 @@ boolean cmd_complete = false;  // whether the command string is complete
 unsigned long animation_start_time = 0;
 
 void setup() {
-  mySerial.begin(9600);
+  // mySerial.begin(9600);
   Serial.begin(9600);
   ws2801fx.init();
   //ws2801fx.setBrightness(20);
@@ -35,7 +35,7 @@ void setup() {
   // ws2801fx.turn_off_pixel(1);
   ws2801fx.start();
   Serial.println(F("Startup complete, beginning animation."));
-  mySerial.println(F("Startup complete, beginning animation."));
+  // mySerial.println(F("Startup complete, beginning animation."));
 }
 
 void loop() {
@@ -117,8 +117,8 @@ void queueWelcome(uint32_t color)
       animations[i] = color;
       Serial.print(F("Queued welcome animation in slot: #"));
       Serial.println(i);
-      mySerial.print(F("Queued welcome animation in slot: #"));
-      mySerial.println(i);
+      // mySerial.print(F("Queued welcome animation in slot: #"));
+      // mySerial.println(i);
       return;
     }
     else if (animations[i] == color)
@@ -140,7 +140,7 @@ uint32_t popAnimation()
   if (animations[0] == 0)
   {
     Serial.println(F("Returning to default animation."));
-    mySerial.println(F("Returning to default animation."));
+    // mySerial.println(F("Returning to default animation."));
     return 0; // 0 means "just go back to normal"
   }
   
@@ -154,8 +154,8 @@ uint32_t popAnimation()
 
   Serial.print(F("Starting welcome animation in color: "));
   Serial.println(ret);
-  mySerial.print(F("Starting welcome animation in color: "));
-  mySerial.println(ret);
+  // mySerial.print(F("Starting welcome animation in color: "));
+  // mySerial.println(ret);
   return ret;
 }
 
@@ -173,16 +173,16 @@ void process_command() {
     ws2801fx.turn_on_pixel(ind);
     Serial.print(F("Turned on light: "));
     Serial.println(ind);
-    mySerial.print(F("Turned on light: "));
-    mySerial.println(ind);
+    // mySerial.print(F("Turned on light: "));
+    // mySerial.println(ind);
   }
   else if (cmd.startsWith(F("OFF "))) {
     uint8_t ind = (uint8_t) cmd.substring(4, cmd.length()).toInt();
     ws2801fx.turn_off_pixel(ind);
     Serial.print(F("Turned off light: "));
     Serial.println(ind);
-    mySerial.print(F("Turned off light: "));
-    mySerial.println(ind);
+    // mySerial.print(F("Turned off light: "));
+    // mySerial.println(ind);
   }
   else if (cmd.startsWith(F("WEL "))) {
     char buf [7];
@@ -193,17 +193,17 @@ void process_command() {
     queueWelcome(color);
     Serial.print(F("Queued welcome animation in color: "));
     Serial.println(color);
-    mySerial.print(F("Queued welcome animation in color: "));
-    mySerial.println(color);
+    // mySerial.print(F("Queued welcome animation in color: "));
+    // mySerial.println(color);
   }
   else
   {
     Serial.print("I didn't understand <");
     Serial.print(cmd);
     Serial.println(">");
-    mySerial.print("I didn't understand <");
-    mySerial.print(cmd);
-    mySerial.println(">");
+    // mySerial.print("I didn't understand <");
+    // mySerial.print(cmd);
+    // mySerial.println(">");
   }
 
   cmd = "";              // reset the commandstring
@@ -222,8 +222,8 @@ void serialEvent() {
   //     cmd += inChar;
   //   }
   // }
-  while(mySerial.available()) {
-    char inChar = (char) mySerial.read();
+  while(Serial.available()) {
+    char inChar = (char) Serial.read();
     if(inChar == '|') {
       cmd_complete = true;
     } else {

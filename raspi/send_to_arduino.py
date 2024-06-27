@@ -23,6 +23,8 @@ import time
 
 frens = re.compile("^NR7WL-[A-Z0-9]{4}$")
 
+SEEN_INTERVAL = 1 * 10 # ten minutes
+
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
@@ -39,9 +41,13 @@ def on_message(client, userdata, msg):
         if identifier in people_lookup:
             person = people_lookup[identifier]
             print(f"Found friend: {person['name']}")
-            to_send = f"WEL {person['color']}|"
-            print(to_send)
-            ser.write(to_send.encode('utf-8'))
+            if person['last_seen'] < int(time.time()) - SEEN_INTERVAL:
+                print("Sending welcome")
+                to_send = f"WEL {person['color']}|"
+                print(to_send)
+                ser.write(to_send.encode('utf-8'))
+            # Happens if newly seen or not
+            people_lookup[identifier]['last_seen'] = int(time.time())
         else:
             print(f"Found someone I don't know: {identifier}")
     else:
@@ -62,10 +68,13 @@ ser = serial.Serial(port='/dev/ttyUSB0',baudrate=9600,parity=serial.PARITY_NONE,
 
 people_lookup = {}
 
+startup_time = int(time.time())
+
 with open("people.yaml", "r") as f:
     people = yaml.safe_load(f)['users']
     for person in people:
         people_lookup[person['beacon']] = person
+        people_lookup[person['beacon']]['last_seen'] = startup_time
 
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.
